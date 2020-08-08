@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class ProblemExtractorApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(ProblemExtractorApplication.class, args);
     }
-
 }
