@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -14,18 +15,16 @@ public class User {
 
     @Id
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
-    @Column(name = "password", nullable = false)
-    private String password;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<SolvedProblem> solvedList;
 
-    @OneToMany
-    @JoinColumn(name = "id")
-    private List<SolvedProblem> solvedList;
+//    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+//    private Set<Account> accounts;
 
     @Builder
-    public User(final Integer id, final String password) {
-        this.id = id;
-        this.password = password;
+    public User(final Long userId) {
+        this.id = userId;
     }
 }

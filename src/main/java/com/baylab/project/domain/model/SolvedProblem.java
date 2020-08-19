@@ -3,15 +3,11 @@ package com.baylab.project.domain.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter
-@ToString
 @Table(name = "solved_problem")
 public class SolvedProblem {
 
@@ -19,15 +15,21 @@ public class SolvedProblem {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "user_id", nullable = false)
-    private Integer userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @Column(name = "problem_id", nullable = false)
-    private Long problemId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "problem_id", nullable = false)
+    private Problem problem;
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "emp_id", nullable = false)
+//    private Employee employee;
 
     @Builder
-    public SolvedProblem(final Integer userId, final Long problemId) {
-        this.userId = userId;
-        this.problemId = problemId;
+    public SolvedProblem(final User user, final Problem problem) {
+        this.user = user;
+        this.problem = problem;
     }
 }

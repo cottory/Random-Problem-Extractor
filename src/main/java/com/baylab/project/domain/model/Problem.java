@@ -2,10 +2,8 @@ package com.baylab.project.domain.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -20,6 +18,9 @@ public class Problem {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "problem", cascade = CascadeType.ALL)
+    private Set<SolvedProblem> solvedList;
 
     @Builder
     public Problem(final Long number, final String name) {

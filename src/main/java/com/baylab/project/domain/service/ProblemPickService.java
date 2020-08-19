@@ -5,7 +5,6 @@ import com.baylab.project.domain.model.Problem;
 import com.baylab.project.domain.model.User;
 
 import javax.annotation.Resource;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -22,15 +21,15 @@ public class ProblemPickService {
     UserStorage userStorage;
 
     @Resource
-    StorageService storageService;
+    SolvedProblemStorage solvedProblemStorage;
 
-    public List<Problem> pickRandomProblems(User user, final int pickNumber)
+    public List<Problem> pickRandomProblems(final User user, final int pickNumber)
     {
         List<Problem> candidateProblems = getCandidateProblems(user.getId());
         return pickProblemsFromCandidate(candidateProblems, pickNumber, candidateProblems.size());
     }
 
-    public List<Problem> getCandidateProblems(Integer user_id)
+    public List<Problem> getCandidateProblems(final Long user_id)
     {
         List<Problem> candidateProblems = new ArrayList<>();
 
